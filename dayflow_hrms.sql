@@ -31,6 +31,22 @@ CREATE TABLE employees (
   department VARCHAR(100),
   joining_date DATE,
   profile_image VARCHAR(255),
+  dob DATE,
+  gender ENUM('Male', 'Female', 'Other'),
+  marital_status ENUM('Single', 'Married', 'Divorced', 'Widowed'),
+  nationality VARCHAR(50),
+  personal_email VARCHAR(100),
+  location VARCHAR(100),
+  manager_id INT,
+  about TEXT,
+  skills TEXT,
+  interests TEXT,
+  certifications TEXT,
+  bank_name VARCHAR(100),
+  account_number VARCHAR(50),
+  ifsc_code VARCHAR(20),
+  pan_no VARCHAR(20),
+  uan_no VARCHAR(20),
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -96,10 +112,16 @@ CREATE TABLE leave_requests (
 CREATE TABLE salary_structures (
   id INT AUTO_INCREMENT PRIMARY KEY,
   employee_id INT,
-  basic DECIMAL(10,2),
-  hra DECIMAL(10,2),
-  allowances DECIMAL(10,2),
-  deductions DECIMAL(10,2),
+  monthly_wage DECIMAL(10,2),
+  working_days INT DEFAULT 5,
+  working_hours INT DEFAULT 8,
+  basic_pct DECIMAL(5,2) DEFAULT 50.00,
+  hra_pct DECIMAL(5,2) DEFAULT 50.00,
+  lta_pct DECIMAL(5,2) DEFAULT 8.33,
+  standard_allowance DECIMAL(10,2) DEFAULT 0,
+  performance_bonus_pct DECIMAL(5,2) DEFAULT 8.33,
+  pf_pct DECIMAL(5,2) DEFAULT 12.00,
+  prof_tax DECIMAL(10,2) DEFAULT 200.00,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (employee_id) REFERENCES employees(id)
 );

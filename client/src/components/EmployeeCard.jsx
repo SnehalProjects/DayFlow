@@ -1,6 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const EmployeeCard = ({ employee }) => {
+    const navigate = useNavigate();
+
     // Status indicators:
     // Present -> 🟢
     // On Leave -> ✈️
@@ -20,7 +23,7 @@ const EmployeeCard = ({ employee }) => {
     };
 
     return (
-        <div className="employee-card">
+        <div className="employee-card" onClick={() => navigate(`/profile/${employee.id}`, { state: { fromNav: false } })}>
             <div className="card-status">
                 {renderStatusIcon()}
             </div>

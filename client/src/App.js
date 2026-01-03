@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import ChangePassword from './pages/ChangePassword';
 import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
 import './App.css';
 
 function App() {
@@ -18,6 +19,10 @@ function App() {
           {/* Main Dashboard - Unified for all roles */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
+
+          {/* Profile Pages */}
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:id" element={<Profile />} />
 
           {/* Default Route */}
           <Route path="/" element={<Navigate to="/login" />} />

@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = ({ activeTab, setActiveTab, user, onLogout }) => {
     const [showDropdown, setShowDropdown] = useState(false);
+    const navigate = useNavigate();
 
     const tabs = ['Employees', 'Attendance', 'Time Off'];
 
     return (
         <nav className="navbar">
             <div className="nav-left">
-                <div className="logo-section" onClick={() => setActiveTab('Employees')}>
+                <div className="logo-section" onClick={() => {
+                    if (setActiveTab) setActiveTab('Employees');
+                    navigate('/dashboard');
+                }}>
                     <div className="logo-icon">HR</div>
                     <span className="logo-text">Dayflow</span>
                 </div>
@@ -18,7 +23,12 @@ const Navbar = ({ activeTab, setActiveTab, user, onLogout }) => {
                         <div 
                             key={tab}
                             className={`nav-tab ${activeTab === tab ? 'active' : ''}`}
-                            onClick={() => setActiveTab(tab)}
+                            onClick={() => {
+                                if (setActiveTab) {
+                                    setActiveTab(tab);
+                                    navigate('/dashboard');
+                                }
+                            }}
                         >
                             {tab}
                         </div>
@@ -40,7 +50,9 @@ const Navbar = ({ activeTab, setActiveTab, user, onLogout }) => {
 
                 {showDropdown && (
                     <div className="profile-dropdown">
-                        <div className="dropdown-item">My Profile</div>
+                        <div className="dropdown-item" onClick={() => navigate('/profile', { state: { fromNav: true } })}>
+                            My Profile
+                        </div>
                         <div className="dropdown-item" onClick={onLogout}>Log Out</div>
                     </div>
                 )}
